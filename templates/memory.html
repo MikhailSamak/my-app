@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Memory{% endblock %}
+
+{% block content %}
+<p>Это страница памяти для хранения данных.</p>
+<form method="POST" action="/api/save_data">
+    <label for="data">Введите данные:</label><br>
+    <textarea id="data" name="data" rows="4" cols="50"></textarea><br>
+    <button type="submit">Сохранить данные</button>
+</form>
+{% endblock %}
