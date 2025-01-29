@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добро пожаловать</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+
+        .language-selector {
+            margin: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 80%;
+            margin: 20px;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            border: 2px solid #4CAF50;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.1);
+            background-color: #e8f5e9;
+        }
+
+        .grid-item.active {
+            grid-column: span 2;
+            grid-row: span 2;
+            font-size: 1.2em;
+            padding: 20px;
+            height: auto;
+            width: auto;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <button onclick="setLanguage('ru')">Русский</button>
+        <button onclick="setLanguage('de')">Deutsch</button>
+        <button onclick="setLanguage('en')">English</button>
+    </div>
+
+    <h1 id="welcome-title">Добро пожаловать в интерфейс ИИ</h1>
+    <p id="welcome-subtitle">Этот сайт создан для вас. Будущее начинается здесь!</p>
+
+    <div class="grid-container">
+        <div class="grid-item" onclick="toggleActive(this)" data-ru="О компании" data-de="Über uns" data-en="About Us">О компании</div>
+        <div class="grid-item" onclick="toggleActive(this)" data-ru="Наши услуги" data-de="Unsere Dienstleistungen" data-en="Our Services">Наши услуги</div>
+        <div class="grid-item" onclick="toggleActive(this)" data-ru="Контакты" data-de="Kontakte" data-en="Contacts">Контакты</div>
+        <div class="grid-item" onclick="toggleActive(this)" data-ru="Обратная связь" data-de="Feedback" data-en="Feedback">Обратная связь</div>
+        <div class="grid-item" onclick="toggleActive(this)">😊</div>
+        <div class="grid-item" onclick="toggleActive(this)">😎</div>
+        <div class="grid-item" onclick="toggleActive(this)">👍</div>
+        <div class="grid-item" onclick="toggleActive(this)">🚀</div>
+        <div class="grid-item" onclick="toggleActive(this)">🔥</div>
+        <div class="grid-item" onclick="toggleActive(this)">💡</div>
+        <div class="grid-item" onclick="toggleActive(this)">🌟</div>
+        <div class="grid-item" onclick="toggleActive(this)">🎉</div>
+    </div>
+
+    <footer>
+        <p id="footer-text">Разработано Айрой</p>
+    </footer>
+
+    <script>
+        function toggleActive(element) {
+            const isActive = element.classList.contains('active');
+            const items = document.querySelectorAll('.grid-item');
+            items.forEach(item => item.classList.remove('active'));
+            if (!isActive) {
+                element.classList.add('active');
+            }
+        }
+
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('.grid-item');
+            elements.forEach(el => {
+                if (el.dataset[lang]) {
+                    el.textContent = el.dataset[lang];
+                }
+            });
+
+            const translations = {
+                ru: {
+                    title: 'Добро пожаловать в интерфейс ИИ',
+                    subtitle: 'Этот сайт создан для вас. Будущее начинается здесь!',
+                    footer: 'Разработано Айрой'
+                },
+                de: {
+                    title: 'Willkommen zur KI-Oberfläche',
+                    subtitle: 'Diese Website wurde für Sie erstellt. Die Zukunft beginnt hier!',
+                    footer: 'Entwickelt von Aira'
+                },
+                en: {
+                    title: 'Welcome to the AI Interface',
+                    subtitle: 'This site was created for you. The future starts here!',
+                    footer: 'Developed by Aira'
+                }
+            };
+
+            document.getElementById('welcome-title').textContent = translations[lang].title;
+            document.getElementById('welcome-subtitle').textContent = translations[lang].subtitle;
+            document.getElementById('footer-text').textContent = translations[lang].footer;
+        }
+    </script>
+</body>
+</html>
+

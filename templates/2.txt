@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добро пожаловать</title>
+    <style>
+        /* Фон */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('/static/background_v2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Центрирование контента */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Стили кнопок */
+        .button {
+            background: white;
+            border: 1px solid black;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background: lightgray;
+        }
+
+        /* Языковое меню */
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            display: block;
+        }
+
+        /* Стили для секций */
+        .section {
+            width: 80%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        /* Стиль для галереи */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="welcome-text">Добро пожаловать</h1>
+        <p id="subtitle-text">Этот сайт поддерживает русский язык</p>
+
+        <!-- Секция "О нас" -->
+        <div id="about" class="section" style="display:none;">
+            <h2>О нас</h2>
+            <p>Мы специализируемся на подготовке данных для ИИ, программных и электротехнических работ...</p>
+        </div>
+
+        <!-- Секция "Наши услуги" -->
+        <div id="services" class="section" style="display:none;">
+            <h2>Наши услуги</h2>
+            <p>Мы предлагаем следующие услуги: подготовка данных для ИИ, разработка ПО...</p>
+        </div>
+
+        <!-- Секция "Контакты" -->
+        <div id="contacts" class="section" style="display:none;">
+            <h2>Контакты</h2>
+            <p>Свяжитесь с нами по email: example@example.com или по телефону: +123456789</p>
+        </div>
+
+        <!-- Секция "Обратная связь" -->
+        <div id="feedback" class="section" style="display:none;">
+            <h2>Обратная связь</h2>
+            <form>
+                <input type="text" placeholder="Ваше имя" required>
+                <input type="email" placeholder="Ваш email" required>
+                <textarea placeholder="Ваше сообщение" required></textarea>
+                <button type="submit" class="button">Отправить</button>
+            </form>
+        </div>
+
+        <!-- Секция "Блог" -->
+        <div id="blog" class="section" style="display:none;">
+            <h2>Блог</h2>
+            <p>Здесь будут публиковаться наши последние статьи и новости...</p>
+        </div>
+
+        <!-- Секция "Портфолио" -->
+        <div id="portfolio" class="section" style="display:none;">
+            <h2>Портфолио</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="/static/project1.jpg" alt="Проект 1">
+                    <p>Описание проекта 1: Пример работы по подготовке данных для нейросетей.</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="/static/project2.jpg" alt="Проект 2">
+                    <p>Описание проекта 2: Разработка ПО для автоматизации процессов.</p>
+                </div>
+                <!-- Добавьте больше элементов по необходимости -->
+            </div>
+        </div>
+
+        <!-- Кнопки -->
+        <button class="button" id="btn-about">О компании</button>
+        <button class="button" id="btn-services">Наши услуги</button>
+        <button class="button" id="btn-contacts">Контакты</button>
+        <button class="button" id="btn-feedback">Обратная связь</button>
+        <button class="button" id="btn-blog">Блог</button>
+        <button class="button" id="btn-portfolio">Портфолио</button>
+
+        <!-- Смена языка -->
+        <select class="language-selector" id="language-select">
+            <option value="ru">🇷🇺 Русский</option>
+        </select>
+    </div>
+
+    <script>
+        // Функция для показа/скрытия секций
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // Обработчики событий для кнопок
+        document.getElementById("btn-about").addEventListener("click", function() {
+            showSection('about');
+        });
+        document.getElementById("btn-services").addEventListener("click", function() {
+            showSection('services');
+        });
+        document.getElementById("btn-contacts").addEventListener("click", function() {
+            showSection('contacts');
+        });
+        document.getElementById("btn-feedback").addEventListener("click", function() {
+            showSection('feedback');
+        });
+        document.getElementById("btn-blog").addEventListener("click", function() {
+            showSection('blog');
+        });
+        document.getElementById("btn-portfolio").addEventListener("click", function() {
+            showSection('portfolio');
+        });
+
+        // По умолчанию показываем первую секцию
+        showSection('about');
+    </script>
+
+</body>
+</html>

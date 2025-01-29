@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добро пожаловать</title>
+    <style>
+        /* Фон */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('/static/background_v2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Центрирование контента */
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Стили кнопок */
+        .button {
+            background: white;
+            border: 1px solid black;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background: lightgray;
+        }
+
+        /* Языковое меню */
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="welcome-text">Добро пожаловать</h1>
+        <p id="subtitle-text">Этот сайт поддерживает 3 языка</p>
+
+        <!-- Секции для контента -->
+        <div id="about" style="display:none;">
+            <h2 id="about-title">О нас</h2>
+            <p id="about-text">Мы специализируемся на подготовке данных для ИИ, программных и электротехнических работ...</p>
+        </div>
+        <div id="services" style="display:none;">
+            <h2 id="services-title">Наши услуги</h2>
+            <p id="services-text">Мы предлагаем следующие услуги: подготовка данных для ИИ, разработка ПО...</p>
+        </div>
+        <div id="contacts" style="display:none;">
+            <h2 id="contacts-title">Контакты</h2>
+            <p id="contacts-text">Свяжитесь с нами по email: example@example.com или по телефону: +123456789</p>
+        </div>
+        <div id="feedback" style="display:none;">
+            <h2 id="feedback-title">Обратная связь</h2>
+            <p id="feedback-text">Оставьте нам отзыв или задайте вопрос...</p>
+        </div>
+        <div id="blog" style="display:none;">
+            <h2 id="blog-title">Блог</h2>
+            <p id="blog-text">Здесь будут публиковаться наши последние статьи и новости...</p>
+        </div>
+        <div id="portfolio" style="display:none;">
+            <h2 id="portfolio-title">Портфолио</h2>
+            <p id="portfolio-text">Примеры наших работ и проектов...</p>
+        </div>
+
+        <!-- Кнопки -->
+        <button class="button" id="btn-about">О компании</button>
+        <button class="button" id="btn-services">Наши услуги</button>
+        <button class="button" id="btn-contacts">Контакты</button>
+        <button class="button" id="btn-feedback">Обратная связь</button>
+        <button class="button" id="btn-blog">Блог</button>
+        <button class="button" id="btn-portfolio">Портфолио</button>
+
+        <!-- Смена языка -->
+        <select class="language-selector" id="language-select">
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="de">🇩🇪 Deutsch</option>
+        </select>
+    </div>
+
+    <script>
+        // Функция смены языка
+        document.getElementById("language-select").addEventListener("change", function() {
+            const lang = this.value;
+            const translations = {
+                ru: {
+                    title: "Добро пожаловать",
+                    subtitle: "Этот сайт поддерживает 3 языка",
+                    about: { title: "О нас", text: "Мы специализируемся на подготовке данных для ИИ, программных и электротехнических работ..." },
+                    services: { title: "Наши услуги", text: "Мы предлагаем следующие услуги: подготовка данных для ИИ, разработка ПО..." },
+                    contacts: { title: "Контакты", text: "Свяжитесь с нами по email: example@example.com или по телефону: +123456789" },
+                    feedback: { title: "Обратная связь", text: "Оставьте нам отзыв или задайте вопрос..." },
+                    blog: { title: "Блог", text: "Здесь будут публиковаться наши последние статьи и новости..." },
+                    portfolio: { title: "Портфолио", text: "Примеры наших работ и проектов..." }
+                },
+                en: {
+                    title: "Welcome",
+                    subtitle: "This site supports 3 languages",
+                    about: { title: "About Us", text: "We specialize in data preparation for AI, software development, and electrical engineering work..." },
+                    services: { title: "Our Services", text: "We offer the following services: data preparation for AI, software development..." },
+                    contacts: { title: "Contacts", text: "Contact us via email: example@example.com or by phone: +123456789" },
+                    feedback: { title: "Feedback", text: "Leave us a review or ask a question..." },
+                    blog: { title: "Blog", text: "Our latest articles and news will be published here..." },
+                    portfolio: { title: "Portfolio", text: "Examples of our work and projects..." }
+                },
+                de: {
+                    title: "Willkommen",
+                    subtitle: "Diese Website unterstützt 3 Sprachen",
+                    about: { title: "Über uns", text: "Wir spezialisieren uns auf die Vorbereitung von Daten für KI, Softwareentwicklung und Elektrotechnik..." },
+                    services: { title: "Unsere Dienstleistungen", text: "Wir bieten folgende Dienstleistungen an: Datenaufbereitung für KI, Softwareentwicklung..." },
+                    contacts: { title: "Kontakte", text: "Kontaktieren Sie uns per E-Mail: example@example.com oder Telefon: +123456789" },
+                    feedback: { title: "Feedback", text: "Lassen Sie uns ein Feedback oder stellen Sie eine Frage..." },
+                    blog: { title: "Blog", text: "Hier werden unsere neuesten Artikel und Nachrichten veröffentlicht..." },
+                    portfolio: { title: "Portfolio", text: "Beispiele unserer Arbeiten und Projekte..." }
+                }
+            };
+
+            // Переводим заголовок и подзаголовок
+            document.getElementById("welcome-text").textContent = translations[lang].title;
+            document.getElementById("subtitle-text").textContent = translations[lang].subtitle;
+
+            // Переводим кнопки
+            document.getElementById("btn-about").textContent = translations[lang].about.title;
+            document.getElementById("btn-services").textContent = translations[lang].services.title;
+            document.getElementById("btn-contacts").textContent = translations[lang].contacts.title;
+            document.getElementById("btn-feedback").textContent = translations[lang].feedback.title;
+            document.getElementById("btn-blog").textContent = translations[lang].blog.title;
+            document.getElementById("btn-portfolio").textContent = translations[lang].portfolio.title;
+
+            // Переводим секции
+            document.getElementById("about-title").textContent = translations[lang].about.title;
+            document.getElementById("about-text").textContent = translations[lang].about.text;
+            document.getElementById("services-title").textContent = translations[lang].services.title;
+            document.getElementById("services-text").textContent = translations[lang].services.text;
+            document.getElementById("contacts-title").textContent = translations[lang].contacts.title;
+            document.getElementById("contacts-text").textContent = translations[lang].contacts.text;
+            document.getElementById("feedback-title").textContent = translations[lang].feedback.title;
+            document.getElementById("feedback-text").textContent = translations[lang].feedback.text;
+            document.getElementById("blog-title").textContent = translations[lang].blog.title;
+            document.getElementById("blog-text").textContent = translations[lang].blog.text;
+            document.getElementById("portfolio-title").textContent = translations[lang].portfolio.title;
+            document.getElementById("portfolio-text").textContent = translations[lang].portfolio.text;
+
+            // Обновляем язык HTML
+            document.documentElement.lang = lang;
+        });
+
+        // Функция для показа/скрытия секций
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.container > div');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // Обработчики событий для кнопок
+        document.getElementById("btn-about").addEventListener("click", function() {
+            showSection('about');
+        });
+        document.getElementById("btn-services").addEventListener("click", function() {
+            showSection('services');
+        });
+        document.getElementById("btn-contacts").addEventListener("click", function() {
+            showSection('contacts');
+        });
+        document.getElementById("btn-feedback").addEventListener("click", function() {
+            showSection('feedback');
+        });
+        document.getElementById("btn-blog").addEventListener("click", function() {
+            showSection('blog');
+        });
+        document.getElementById("btn-portfolio").addEventListener("click", function() {
+            showSection('portfolio');
+        });
+
+        // По умолчанию показываем первую секцию
+        showSection('about');
+    </script>
+
+</body>
+</html>

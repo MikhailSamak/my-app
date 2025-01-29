@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогресс-Електро</title>
+    <style>
+        /* Фон с эффектом Glassmorphism */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('/static/background_v2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            color: #333;
+        }
+
+        /* Полупрозрачные карточки */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 60%;
+            margin: 50px auto;
+        }
+
+        /* Секция "О нас" и окна информации */
+        .info-section {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 600px; /* Ограничение ширины */
+            width: auto; /* Автоматическая подстройка ширины */
+            margin: 30px auto;
+            display: none;
+        }
+
+        /* Кнопки в стиле Glassmorphism */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            color: black;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Языковое меню */
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-container">
+        <h1 id="welcome-text">Прогресс-Електро</h1>
+        <p id="subtitle-text">Инженерные технологии под ключ</p>
+    </div>
+
+    <div class="info-section" id="about-info">
+        <h2>О нас</h2>
+        <p>Мы специализируемся на подготовке данных для ИИ, программных и электротехнических работ.</p>
+    </div>
+
+    <div class="info-section" id="services-info">
+        <h2>Наши услуги</h2>
+        <p>Мы предлагаем услуги по анализу данных, машинному обучению и разработке программного обеспечения.</p>
+    </div>
+
+    <div class="info-section" id="contacts-info">
+        <h2>Контакты</h2>
+        <p>Свяжитесь с нами по email: info@example.com</p>
+    </div>
+
+    <div class="info-section" id="feedback-info">
+        <h2>Обратная связь</h2>
+        <p>Мы всегда рады вашим предложениям и отзывам!</p>
+    </div>
+
+    <div class="info-section" id="blog-info">
+        <h2>Блог</h2>
+        <p>Читайте наши статьи о технологиях и искусственном интеллекте.</p>
+    </div>
+
+    <div class="info-section" id="portfolio-info">
+        <h2>Портфолио</h2>
+        <p>Посмотрите наши успешные проекты в области ИИ.</p>
+    </div>
+
+    <!-- Кнопки в горизонтальном ряду -->
+    <div class="button-container">
+        <button class="button" onclick="showInfo('about-info')">О компании</button>
+        <button class="button" onclick="showInfo('services-info')">Наши услуги</button>
+        <button class="button" onclick="showInfo('contacts-info')">Контакты</button>
+        <button class="button" onclick="showInfo('feedback-info')">Обратная связь</button>
+        <button class="button" onclick="showInfo('blog-info')">Блог</button>
+        <button class="button" onclick="showInfo('portfolio-info')">Портфолио</button>
+    </div>
+
+    <!-- Смена языка -->
+    <select class="language-selector" id="language-select">
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="pt">🇵🇹 Português</option>
+        <option value="ar">🇸🇦 العربية</option>
+    </select>
+
+    <script>
+        function showInfo(sectionId) {
+            document.querySelectorAll('.info-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогресс-Електро</title>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-blur: blur(10px);
+            --glass-radius: 20px;
+            --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            --button-bg: rgba(255, 255, 255, 0.2);
+            --button-hover-bg: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='background_v2.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            color: #333;
+        }
+
+        .glass-container, .button-container, .info-section {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: var(--glass-radius);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .glass-container {
+            padding: 20px;
+            text-align: center;
+            width: 60%;
+            margin: 50px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 80px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        .button {
+            background: var(--button-bg);
+            border: 1px solid var(--glass-border);
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            color: black;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: var(--button-hover-bg);
+        }
+
+        .info-section {
+            padding: 20px;
+            text-align: left;
+            max-width: 600px;
+            width: auto;
+            margin: 30px auto;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .info-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .glass-container {
+                width: 90%;
+                flex-direction: column;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="glass-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Логотип" class="logo">
+            <div>
+                <h1 id="welcome-text">Прогресс-Електро</h1>
+                <p id="subtitle-text">Инженерные технологии под ключ</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="button-container">
+            <button class="button" data-key="about" onclick="showInfo('about-info')">О компании</button>
+            <button class="button" data-key="services" onclick="showInfo('services-info')">Наши услуги</button>
+            <button class="button" data-key="contacts" onclick="showInfo('contacts-info')">Контакты</button>
+            <button class="button" data-key="feedback" onclick="showInfo('feedback-info')">Обратная связь</button>
+            <button class="button" data-key="blog" onclick="showInfo('blog-info')">Блог</button>
+            <button class="button" data-key="portfolio" onclick="showInfo('portfolio-info')">Портфолио</button>
+        </div>
+
+        <div class="info-section" id="about-info">
+            <h2>О нас</h2>
+            <p>Мы специализируемся на подготовке данных для ИИ, программных и электротехнических работ.</p>
+        </div>
+        <div class="info-section" id="services-info">
+            <h2>Наши услуги</h2>
+            <p>Мы предоставляем полный спектр инженерных услуг.</p>
+        </div>
+        <div class="info-section" id="contacts-info">
+            <h2>Контакты</h2>
+            <p>Свяжитесь с нами по email: info@example.com</p>
+        </div>
+        <div class="info-section" id="feedback-info">
+            <h2>Обратная связь</h2>
+            <p>Мы всегда рады вашим предложениям и отзывам!</p>
+        </div>
+        <div class="info-section" id="blog-info">
+            <h2>Блог</h2>
+            <p>Читайте последние новости и статьи о технологиях и инновациях.</p>
+        </div>
+        <div class="info-section" id="portfolio-info">
+            <h2>Портфолио</h2>
+            <p>Ознакомьтесь с нашими проектами и успешными кейсами.</p>
+        </div>
+    </main>
+
+    <footer>
+        <select class="language-selector" id="language-select" onchange="changeLanguage()">
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="de">🇩🇪 Deutsch</option>
+        </select>
+    </footer>
+
+    <script>
+        const translations = {
+            ru: {
+                title: "Прогресс-Електро",
+                subtitle: "Инженерные технологии под ключ",
+                about: "О компании",
+                services: "Наши услуги",
+                contacts: "Контакты",
+                feedback: "Обратная связь",
+                blog: "Блог",
+                portfolio: "Портфолио"
+            },
+            en: {
+                title: "Progress-Elektro",
+                subtitle: "Engineering solutions turnkey",
+                about: "About Us",
+                services: "Our Services",
+                contacts: "Contacts",
+                feedback: "Feedback",
+                blog: "Blog",
+                portfolio: "Portfolio"
+            },
+            de: {
+                title: "Progress-Elektro",
+                subtitle: "Schlüsselfertige Ingenieurlösungen",
+                about: "Über Uns",
+                services: "Unsere Dienstleistungen",
+                contacts: "Kontakte",
+                feedback: "Feedback",
+                blog: "Blog",
+                portfolio: "Portfolio"
+            }
+        };
+
+        function showInfo(sectionId) {
+            document.querySelectorAll('.info-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            const section = document.getElementById(sectionId);
+            section.classList.add('active');
+        }
+
+        function changeLanguage() {
+            const lang = document.getElementById("language-select").value;
+            const translationsForLang = translations[lang];
+
+            if (!translationsForLang) {
+                console.error("Translations for selected language not found!");
+                return;
+            }
+
+            document.getElementById("welcome-text").innerText = translationsForLang.title;
+            document.getElementById("subtitle-text").innerText = translationsForLang.subtitle;
+
+            document.querySelectorAll(".button").forEach(btn => {
+                const key = btn.getAttribute("data-key");
+                btn.innerText = translationsForLang[key];
+            });
+
+            document.querySelectorAll(".info-section").forEach(section => {
+                const id = section.id.replace("-info", "");
+                section.querySelector("h2").innerText = translationsForLang[id];
+            });
+        }
+    </script>
+</body>
+</html>
